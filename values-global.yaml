@@ -11,6 +11,8 @@ global:
     azure:
       enabled: true
       defaultVMFlavour: "Standard_DC2as_v5"
+  secretStore:
+    backend: vault
 main:
   # WARNING
   # This default configuration uses a single cluster on azure.
