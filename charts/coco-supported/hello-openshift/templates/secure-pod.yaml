@@ -10,7 +10,24 @@ spec:
   runtimeClassName: kata-remote
   containers:
     - name: hello-openshift
-      image: quay.io/openshift/origin-hello-openshift
+      image: python:3.11-alpine
+      command: ["python", "-c"]
+      args:
+        - |
+          from http.server import HTTPServer, BaseHTTPRequestHandler
+          from datetime import datetime
+          class Handler(BaseHTTPRequestHandler):
+              def do_GET(self):
+                  self.send_response(200)
+                  self.send_header('Content-type', 'text/plain')
+                  self.end_headers()
+                  now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                  msg = f"Hello OpenShift!\n{now}\n"
+                  self.wfile.write(msg.encode())
+              def log_message(self, format, *args):
+                  print(f"Request: {args[0]}")
+          print("Starting server on port 8888...")
+          HTTPServer(('', 8888), Handler).serve_forever()
       ports:
         - containerPort: 8888
       securityContext:
@@ -23,4 +40,3 @@ spec:
             - ALL
         seccompProfile:
           type: RuntimeDefault
-
