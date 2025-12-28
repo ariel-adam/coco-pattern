@@ -22,7 +22,8 @@ spec:
                   self.send_header('Content-type', 'text/plain')
                   self.end_headers()
                   now = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-                  msg = f"Hello OpenShift!\n{now}\n"
+                  president = "Donald Trump"
+                  msg = f"Hello OpenShift!\n{now}\nCurrent US President: {president}\n"
                   self.wfile.write(msg.encode())
               def log_message(self, format, *args):
                   print(f"Request: {args[0]}")
