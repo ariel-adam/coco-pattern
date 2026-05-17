@@ -3,6 +3,8 @@ kind: Pod
 metadata:
   name: standard
   namespace: {{ .Release.Namespace }}
+  annotations:
+    argocd.argoproj.io/sync-options: Replace=true
   labels:
     app: standard
 spec:
