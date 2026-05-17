@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: standard
+  namespace: {{ .Release.Namespace }}
   labels:
     app: standard
 spec:
@@ -9,6 +10,9 @@ spec:
   containers:
     - name: hello-openshift
       image: quay.io/openshift/origin-hello-openshift
+      env:
+        - name: GITOPS_DEMO
+          value: "pushed-from-git-triggered-argocd"
       ports:
         - containerPort: 8888
       securityContext:
