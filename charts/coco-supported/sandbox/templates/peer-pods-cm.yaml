@@ -34,9 +34,13 @@ spec:
               AZURE_RESOURCE_GROUP: '{{ `{{ (fromJson (fromConfigMap "openshift-cloud-controller-manager" "cloud-conf" "cloud.conf" | toLiteral)).vnetResourceGroup }}` }}'
               AZURE_REGION: '{{ `{{ (fromJson (fromConfigMap "openshift-cloud-controller-manager" "cloud-conf" "cloud.conf" | toLiteral)).location }}` }}'
               AZURE_SUBNET_ID: '/subscriptions/{{ `{{ (fromJson (fromConfigMap "openshift-cloud-controller-manager" "cloud-conf" "cloud.conf" | toLiteral)).subscriptionId }}` }}/resourceGroups/{{ `{{ (fromJson (fromConfigMap "openshift-cloud-controller-manager" "cloud-conf" "cloud.conf" | toLiteral)).vnetResourceGroup }}` }}/providers/Microsoft.Network/virtualNetworks/{{ `{{ (fromJson (fromConfigMap "openshift-cloud-controller-manager" "cloud-conf" "cloud.conf" | toLiteral)).vnetName }}` }}/subnets/{{ `{{ (fromJson (fromConfigMap "openshift-cloud-controller-manager" "cloud-conf" "cloud.conf" | toLiteral)).subnetName }}` }}'
+              {{- if .Values.sandbox.peerPodNsgId }}
+              AZURE_NSG_ID: "{{ .Values.sandbox.peerPodNsgId }}"
+              {{- else }}
               AZURE_NSG_ID: '/subscriptions/{{ `{{ (fromJson (fromConfigMap "openshift-cloud-controller-manager" "cloud-conf" "cloud.conf" | toLiteral)).subscriptionId }}` }}/resourceGroups/{{ `{{ (fromJson (fromConfigMap "openshift-cloud-controller-manager" "cloud-conf" "cloud.conf" | toLiteral)).resourceGroup }}` }}/providers/Microsoft.Network/networkSecurityGroups/{{ `{{ (fromJson (fromConfigMap "openshift-cloud-controller-manager" "cloud-conf" "cloud.conf" | toLiteral)).securityGroupName }}` }}'
+              {{- end }}
               DISABLECVM: "false"
-              PROXY_TIMEOUT: "5m"
+              PROXY_TIMEOUT: "30m"
               INITDATA: '{{ `{{if (lookup "v1" "ConfigMap" "imperative" "initdata").metadata.name }}{{ fromConfigMap "imperative" "initdata" "INITDATA" }}{{ else }}{{ end }}` }}'
 
 ---
