@@ -10,7 +10,8 @@ global:
   coco:
     azure:
       enabled: true
-      defaultVMFlavour: "Standard_DC4as_v5"
+      defaultVMFlavour: "Standard_D4as_v5"
+      disableCVM: "true"
   secretStore:
     backend: vault
 main:
