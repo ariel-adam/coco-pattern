@@ -10,6 +10,11 @@ global:
   objectStorage:
     backingStorageClass: "managed-storage"
 
+# Custom NSG in a user-owned RG (with TCP 15150 / UDP 9000 from VirtualNetwork) for Azure peer pods when
+# the ARO-managed worker NSG cannot be edited. Set per subscription/RG; example from lab cluster:
+sandbox:
+  peerPodNsgId: ""
+
 
 # letsencrypt:
 #   enabled: true
