@@ -1,5 +1,5 @@
 apiVersion: confidentialcontainers.org/v1alpha1
-kind: KbsConfig
+kind: TrusteeConfig
 metadata:
   name: kbsconfig
   namespace: {{ .Values.kbs.deployNS }}
@@ -22,11 +22,11 @@ spec:
   #   certStorePvc: <persistent-volume-claim>
 
   # Override attestation policy (optional)
-  # kbsAttestationPolicyConfigMapName: attestation-policy 
+  # kbsAttestationPolicyConfigMapName: attestation-policy
 
   # Inject environment variables (optional)
   # Enable DEBUG logging in trustee pods
-  KbsEnvVars: 
+  KbsEnvVars:
     RUST_LOG: debug
 
   # service type (optional, it defaults to ClusterIP)

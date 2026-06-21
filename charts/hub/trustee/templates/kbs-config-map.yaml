@@ -11,6 +11,7 @@ data:
     private_key = "/etc/https-key/tls.key"
     certificate = "/etc/https-cert/tls.crt"
     [admin]
+    type = "Simple"
     insecure_api = true
     auth_public_key = "/etc/auth-secret/publicKey"
 

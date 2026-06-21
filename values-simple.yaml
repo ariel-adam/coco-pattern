@@ -34,7 +34,7 @@ clusterGroup:
       source: redhat-operators
       channel: stable
       installPlanApproval: Manual
-      csv: trustee-operator.v0.4.1
+      csv: trustee-operator.v1.1.0
     cert-manager:
       name: openshift-cert-manager-operator
       namespace: cert-manager-operator
